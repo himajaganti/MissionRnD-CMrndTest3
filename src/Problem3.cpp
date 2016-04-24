@@ -70,10 +70,34 @@ int isOperand(char *data){
 }
 int getOperand(char *data){
 	//converts data string to an integer "123" => 123
+	int i;
+
+	for (i = 0; data[i] != '\0'; i++)
+	{
+		data[i] = (int)(data[i]) - 48;
+	}
 	return 0;
 }
+int inorder(struct enode* root)
+{
+	if (root != NULL){
+		inorder(root->left);
+		isOperand(root->data);
+		inorder(root->right);
+		isOperand(root->data);
+		isOperator(root->data);
+		
+	}
+}
+
 //Helper Functions end
 int solve_tree(struct enode *root){
-    return -1;
+	int a;
+	if (root == NULL)
+	{
+		return -1;
+	}
+	a = inorder(root);
+	return a;
 }
 

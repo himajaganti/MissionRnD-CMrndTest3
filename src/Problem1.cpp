@@ -43,14 +43,44 @@ Difficulty : Easy
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+int count = 0;
 
 struct node{
 	int data;
 	struct node *left;
 	struct node *right;
 };
+int postorder(struct node *root)
+{
+	int sum1 = 0, h;
 
+	if (root != NULL){
+		postorder(root->left);
+		postorder(root->right);
+		if (count == 0)
+		{
+			sum1 = sum1 + root->data; h = sum1; count++;
+		}
+		if (count > 0)
+		{
+			h = h + root->data;
+		}
+		
+		return h;
 
+	}
+}
 int get_missing_value(struct node *root,int n){
-    return -1;
+	int a, i, m, sum = 0;
+	if (root == NULL)
+	{
+		return -1;
+	}
+	for (i = 1; i <= n; i++)
+	{
+		sum = sum + i;
+	}
+	m=postorder(root);
+	a = sum - m;
+	return a;
 }
